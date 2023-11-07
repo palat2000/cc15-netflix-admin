@@ -1,42 +1,32 @@
 import { useState } from "react";
-import { nanoid } from "nanoid";
 import { PlusIcon } from "../icon/Icon";
+import useMovie from "../../hooks/useMovie";
+import AddMovie from "./AddMovie";
 
 function AddMovieForm() {
-  const [inputData, setInputData] = useState([]);
+  const { addMovie, inputData, setInputData } = useMovie();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setInputData([]);
   };
-  const addMovie = () => {
-    setInputData([
-      ...inputData,
-      {
-        id: nanoid,
-        title: "",
-        isTVShow: false,
-        image: null,
-        release_year: null,
-        genres: null,
-        trailer: null,
-        detail: null,
-        actorName: [],
-        video: [
-          {
-            videoEpisodeName: null,
-            videoEpisodeNo: null,
-            video: null,
-          },
-        ],
-      },
-    ]);
-  };
+
   return (
     <div className="flex flex-col">
-      <form onSubmit={handleSubmit}></form>
-      <div className="bg-primary self-start p-2 rounded-full hover:rotate-[360deg] transition-transform duration-200 cursor-pointer">
+      <div
+        onClick={addMovie}
+        className="bg-primary self-start p-2 rounded-full hover:rotate-[360deg] transition-transform duration-200 cursor-pointer"
+      >
         <PlusIcon size="1rem" />
       </div>
+      <form onSubmit={handleSubmit}>
+        {inputData.map((movie) => (
+          <AddMovie key={movie.id} movie={movie} />
+        ))}
+        <button className="px-3 py-1 bg-primary text-white rounded-md">
+          Submit
+        </button>
+      </form>
     </div>
   );
 }

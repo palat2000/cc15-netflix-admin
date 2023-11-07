@@ -1,4 +1,4 @@
-export function PlusIcon({ size }) {
+export function PlusIcon({ size, color = "#ffffff" }) {
   return (
     <svg
       width={size}
@@ -16,7 +16,7 @@ export function PlusIcon({ size }) {
       <g id="SVGRepo_iconCarrier">
         <path
           d="M4 12H20M12 4V20"
-          stroke="#ffffff"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

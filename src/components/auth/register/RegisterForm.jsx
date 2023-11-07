@@ -1,4 +1,4 @@
-import FormInput from "../FormInput";
+import FormInput from "../../input/FormInput";
 
 function RegisterForm() {
   const handleSubmit = (e) => {

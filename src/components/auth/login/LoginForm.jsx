@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import FormInput from "../FormInput";
+import FormInput from "../../input/FormInput";
 
 function LoginForm() {
   const navigate = useNavigate();

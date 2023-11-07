@@ -1,4 +1,4 @@
-function RegisterFormInput({ type = "text", placeholder, value, onChange }) {
+function FormInput({ type = "text", placeholder, value, onChange, name, id }) {
   return (
     <input
       placeholder={placeholder}
@@ -6,8 +6,10 @@ function RegisterFormInput({ type = "text", placeholder, value, onChange }) {
       type={type}
       value={value}
       onChange={onChange}
+      name={name}
+      id={id}
     />
   );
 }
 
-export default RegisterFormInput;
+export default FormInput;
