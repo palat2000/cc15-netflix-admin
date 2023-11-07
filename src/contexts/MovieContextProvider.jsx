@@ -10,7 +10,6 @@ function MovieContextProvider({ children }) {
     setInputData([
       ...inputData,
       {
-        id: nanoid(),
         title: "",
         isTVShow: false,
         image: null,
@@ -18,8 +17,8 @@ function MovieContextProvider({ children }) {
         genres: null,
         trailer: null,
         detail: "",
-        actorName: [{ id: nanoid(), name: "" }],
-        video: [],
+        actorName: ["", ""],
+        video: [{ videoEpisodeName: "", videoEpisodeNo: "", video: null }],
       },
     ]);
   };
