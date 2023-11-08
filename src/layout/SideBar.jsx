@@ -1,15 +1,21 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const OPTION = [
   { id: "/", title: "Home" },
-  { id: "user", title: "User" },
-  { id: "movie", title: "Movie" },
+  { id: "/user", title: "User" },
+  { id: "/movie", title: "Movie" },
 ];
 
 function SideBar() {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState("/");
+  const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    setSelected(window.location.pathname);
+  }, []);
+
   return (
     <div className="w-64 py-8 bg-black">
       <ul className="text-white text-center flex flex-col gap-4 px-4">

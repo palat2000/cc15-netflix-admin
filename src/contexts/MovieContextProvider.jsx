@@ -1,47 +1,62 @@
 import { useState, createContext } from "react";
-import { nanoid } from "nanoid";
+import axios from "axios";
 
 export const MovieContext = createContext(null);
 
 function MovieContextProvider({ children }) {
   const [inputData, setInputData] = useState([]);
+  const [data, setData] = useState(null);
 
-  const addMovie = () => {
-    setInputData([
-      ...inputData,
-      {
-        title: "",
-        isTVShow: false,
-        image: null,
-        release_year: null,
-        genres: null,
-        trailer: null,
-        detail: "",
-        actorName: ["", ""],
-        video: [{ videoEpisodeName: "", videoEpisodeNo: "", video: null }],
-      },
-    ]);
+  const handleUploadFile = async (e) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      const res = await axios.post(
+        "http://localhost:8080/admin/prepare-file",
+        formData
+      );
+      setData(res.data.formattedData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const addVideo = (movieId) => {
-    const newInputData = [...inputData];
-    const index = newInputData.findIndex((movie) => movie.id === movieId);
-    newInputData[index].video = [
-      ...newInputData[index].video,
-      { id: nanoid(), videoEpisodeName: "", videoEpisodeNo: "", video: null },
-    ];
-    setInputData([...newInputData]);
-  };
+  // const addMovie = () => {
+  //   setInputData([
+  //     ...inputData,
+  //     {
+  //       title: "",
+  //       isTVShow: false,
+  //       image: null,
+  //       release_year: null,
+  //       genres: null,
+  //       trailer: null,
+  //       detail: "",
+  //       actorName: ["", ""],
+  //       video: [{ videoEpisodeName: "", videoEpisodeNo: "", video: null }],
+  //     },
+  //   ]);
+  // };
 
-  const addActor = (movieId) => {
-    const newInputData = [...inputData];
-    const index = newInputData.findIndex((movie) => movie.id === movieId);
-    newInputData[index].actorName = [
-      ...newInputData[index].actorName,
-      { id: nanoid(), name: "" },
-    ];
-    setInputData(newInputData);
-  };
+  // const addVideo = (movieId) => {
+  //   const newInputData = [...inputData];
+  //   const index = newInputData.findIndex((movie) => movie.id === movieId);
+  //   newInputData[index].video = [
+  //     ...newInputData[index].video,
+  //     { id: nanoid(), videoEpisodeName: "", videoEpisodeNo: "", video: null },
+  //   ];
+  //   setInputData([...newInputData]);
+  // };
+
+  // const addActor = (movieId) => {
+  //   const newInputData = [...inputData];
+  //   const index = newInputData.findIndex((movie) => movie.id === movieId);
+  //   newInputData[index].actorName = [
+  //     ...newInputData[index].actorName,
+  //     { id: nanoid(), name: "" },
+  //   ];
+  //   setInputData(newInputData);
+  // };
 
   //   const addData = (value, name, movieId) => {
   //     const newInputData = [...inputData];
@@ -73,7 +88,8 @@ function MovieContextProvider({ children }) {
 
   return (
     <MovieContext.Provider
-      value={{ inputData, addMovie, addVideo, addActor, setInputData }}
+      // value={{ inputData, addMovie, addVideo, addActor, setInputData }}
+      value={{ handleUploadFile, data, setData }}
     >
       {children}
     </MovieContext.Provider>
