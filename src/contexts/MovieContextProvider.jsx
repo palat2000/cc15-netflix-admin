@@ -15,6 +15,7 @@ function MovieContextProvider({ children }) {
         "http://localhost:8080/admin/prepare-file",
         formData
       );
+      console.log(res)
       setData(res.data.formattedData);
     } catch (err) {
       console.log(err);

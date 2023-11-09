@@ -80,8 +80,8 @@ function AddMovieForm() {
                   </td>
                   <td>{item.detail}</td>
                   <td>{item.actorName.join(", ")}</td>
-                  <ColMovie item={item} name="videoEpisodeName" />
-                  <ColMovie item={item} name="videoEpisodeNo" />
+                  <td><ColMovie item={item} name="videoEpisodeName" /></td>
+                  <td><ColMovie item={item} name="videoEpisodeNo" /></td>
                   <td>
                     {item.video.map((videoItem, index) =>
                       videoItem.videoUrl ? (
