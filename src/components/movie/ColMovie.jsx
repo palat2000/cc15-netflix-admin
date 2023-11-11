@@ -1,6 +1,6 @@
 function ColMovie({ item, name }) {
   return (
-    <td className="flex flex-col gap-10 h-full">
+    <div className="flex flex-col gap-10 h-full">
       {item.video.map((videoItem, idx) => {
         return (
           <div key={idx}>
@@ -8,7 +8,7 @@ function ColMovie({ item, name }) {
           </div>
         );
       })}
-    </td>
+    </div>
   );
 }
 
