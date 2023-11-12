@@ -5,11 +5,16 @@ import MoviePage from "../pages/MoviePage";
 import UserPage from "../pages/UserPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import Authenticated from "../components/auth/Authenticated";
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Layout />,
+    element: (
+      // <Authenticated>
+      <Layout />
+      // </Authenticated>
+    ),
     children: [
       { path: "", element: <HomePage /> },
       { path: "movie", element: <MoviePage /> },
