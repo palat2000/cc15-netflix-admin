@@ -135,9 +135,9 @@ function ListMovie() {
                     EDIT
                   </td>
                   <td
-                    onClick={() => {
-                      return deleteMovieList({ id: data.id });
-                    }}
+                    // onClick={() => {
+                    //   return deleteMovieList({ id: data.id });
+                    // }}
                     className="p-3 text-sm tracking-wide text-left border hover:bg-red-500 hover:text-white"
                   >
                     DELETE
