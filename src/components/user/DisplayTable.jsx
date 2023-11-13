@@ -1,7 +1,7 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
 
-export default function DisplayTable({ columnFormat, data }) {
+export default function DisplayTable({ columnFormat, data, statusBar }) {
   const gridOptions = {
     defaultColDef: {
       resizable: true,
@@ -19,11 +19,7 @@ export default function DisplayTable({ columnFormat, data }) {
         rowData={data}
         gridOptions={gridOptions}
         domLayout="autoHeight"
-        statusBar={{
-          statusPanels: [
-            { statusPanel: "agTotalRowCountComponent", align: "left" },
-          ],
-        }}
+        colResizeDefault="shift"
       ></AgGridReact>
     </div>
   );
