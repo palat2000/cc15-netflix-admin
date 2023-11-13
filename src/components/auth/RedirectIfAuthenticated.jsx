@@ -3,7 +3,7 @@ import { useAdmin } from "../../hooks/use-admin";
 
 export default function Authenticated({ children }) {
   const { authAdmin } = useAdmin();
-  console.log(authAdmin);
+  // console.log(authAdmin);
   if (authAdmin) {
     return <Navigate to="/" />;
   }
