@@ -82,13 +82,13 @@ function ListMovie() {
           <br />
           <div className="flex gap-2">
             <div
-              className="cursor-pointer hover:bg-gray-400"
+              className="cursor-pointer hover:bg-gray-400 text-2xl p-3"
               onClick={deleteMovieList}
             >
               Confirm
             </div>
             <div
-              className="cursor-pointer hover:bg-gray-400"
+              className="cursor-pointer hover:bg-gray-400 text-2xl p-3"
               onClick={() => setIsOpenConfirmDelete(!isOpenConfirmDelete)}
             >
               Cancel
@@ -157,14 +157,14 @@ function ListMovie() {
               )}
             </tr>
             <tr className="border-4 ">
-              <td className="border-4 p-3">ID</td>
-              <td className="p-3">{dataEditModal.id}</td>
+              <td className="border-4 p-1">ID</td>
+              <td className="p-1">{dataEditModal.id}</td>
             </tr>
             <tr className="border-4">
-              <td className="border-4 p-3 ">Title</td>
-              <td className="border-4 p-3">{dataEditModal.title}</td>
+              <td className="border-4 p-1 ">Title</td>
+              <td className="border-4 p-1">{dataEditModal.title}</td>
 
-              <td className="w-40 border-4 p-3">title</td>
+              <td className="w-40 border-4 p-1">title</td>
 
               <input
                 onChange={(e) => {
@@ -172,30 +172,30 @@ function ListMovie() {
                 }}
                 value={title ? title : dataEditModal.title}
                 type="text"
-                className="p-3"
+                className="p-1"
               />
             </tr>
 
             <tr className="border-4">
-              <td className="border-4 p-3">Release year</td>
-              <td className="border-4 p-3">{dataEditModal.release_year}</td>
+              <td className="border-4 p-1">Release year</td>
+              <td className="border-4 p-1">{dataEditModal.release_year}</td>
 
-              <td className="w-40 border-4 p-3">Release year </td>
+              <td className="w-40 border-4 p-1">Release year </td>
               <input
                 onChange={(e) => {
                   setYear(e.target.value);
                 }}
                 value={year ? year : dataEditModal.release_year}
                 type="text"
-                className="p-3"
+                className="p-1"
               />
             </tr>
 
             <tr className="border-4">
-              <td className="border-4 p-3">Counting watching</td>
-              <td className="border-4 p-3">{dataEditModal.count_watching}</td>
+              <td className="border-4 p-1">Counting watching</td>
+              <td className="border-4 p-1">{dataEditModal.count_watching}</td>
 
-              <td className="w-40 border-4 p-3">Counting watching </td>
+              <td className="w-40 border-4 p-1">Counting watching </td>
               <input
                 onChange={(e) => {
                   setCountWatch(e.target.value);
@@ -204,15 +204,15 @@ function ListMovie() {
                 type="text"
                 name=""
                 id=""
-                className="p-3"
+                className="p-1"
               />
             </tr>
 
             <tr className="border-4">
-              <td className="border-4 p-3">Counting Liking</td>
-              <td className="border-4 p-3">{dataEditModal.count_liked}</td>
+              <td className="border-4 p-1">Counting Liking</td>
+              <td className="border-4 p-1">{dataEditModal.count_liked}</td>
 
-              <td className="w-40 border-4 p-3">Counting Liking </td>
+              <td className="w-40 border-4 p-1">Counting Liking </td>
               <input
                 onChange={(e) => {
                   setCountLike(e.target.value);
@@ -221,53 +221,52 @@ function ListMovie() {
                 type="text"
                 name=""
                 id=""
-                className="p-3"
+                className="p-1"
               />
             </tr>
 
             <tr className="border-4">
-              <td className="border-4 p-3">Detail</td>
-              <td className="w-96 border-4 p-3">{dataEditModal.detail}</td>
+              <td className="border-4 p-1">Detail</td>
+              <td className="w-96 border-4 p-1">{dataEditModal.detail}</td>
 
-              <td className="w-40 border-4 p-3">Detail </td>
+              <td className="w-40 border-4 p-1">Detail </td>
               <textarea
                 onChange={(e) => {
                   setDetail(e.target.value);
                 }}
                 value={detail ? detail : dataEditModal.detail}
                 type="text"
-                className="w-full h-full p-3"
+                className="w-full h-full p-1"
               />
             </tr>
 
             <tr className="border-4">
-              <td className="border-4 p-3">TVShow</td>
-              <td className="border-4 p-3">{dataEditModal.isTVShow}</td>
+              <td className="border-4 p-1">TVShow</td>
+              <td className="border-4 p-1">{dataEditModal.isTVShow}</td>
 
-              <td className="w-40 border-4 p-3">TVShow</td>
+              <td className="w-40 border-4 p-1">TVShow</td>
               <input
                 onChange={isTvShowHandleChange}
                 value={tvShow ? tvShow : dataEditModal.isTVShow}
                 type="checkbox"
-                className="p-3"
+                className="h-5 w-5 cursor-pointer"
               />
             </tr>
 
             <tr className="border-4">
-              <td className="border-4 p-3">Enum Genres</td>
-              <td className="border-4 p-3">{dataEditModal.enumGenres}</td>
+              <td className="border-4 p-1">Enum Genres</td>
+              <td className="border-4 p-1">{dataEditModal.enumGenres}</td>
 
-              <td className="w-40 border-4 p-3">Enum Genres :</td>
+              <td className="w-40 border-4 p-1">Enum Genres :</td>
               <input
                 onClick={() => setIsOpenEnumGen(!isOpenEnumGen)}
-                className="cursor-pointer p-3"
+                className="cursor-pointer p-1"
                 value={enumGen ? enumGen : dataEditModal.enumGenres}
                 type="text"
-                
               />
 
               {isOpenEnumGen && (
-                <div className="flex flex-col absolute bg-gray-300 gap-1 p-3   w-48 ">
+                <div className="flex flex-col absolute bg-gray-300 gap-1 p-1   w-48 ">
                   <div
                     onClick={() => {
                       setIsOpenEnumGen(!isOpenEnumGen);
@@ -335,11 +334,11 @@ function ListMovie() {
               )}
             </tr>
 
-            <tr className="border-4 	" >
-              <td className="border-4 p-3" >Trailer</td>
-              <td className="border-4 p-3">{dataEditModal.trailer}</td>
+            <tr className="border-4 	">
+              <td className="border-4 p-1">Trailer</td>
+              <td className="border-4 p-1">{dataEditModal.trailer}</td>
 
-              <td className="p-3" >Trailer </td>
+              <td className="p-1">Trailer </td>
               <input
                 onChange={(e) => {
                   setTrailer(e.target.value);
@@ -348,55 +347,28 @@ function ListMovie() {
                 type="text"
                 name=""
                 id=""
-                className="p-3"
+                className="p-1"
               />
             </tr>
-            <tr className=" " > 
+          </tbody>
+          <tbody>
+            <tr>
+              <td className="text-white">ok</td>
+              <td className="text-white">cancel</td>
+              <td className="text-white">ok</td>
+              <td className="text-white">cancel</td>
               <td
-              
                 onClick={editMovieList}
-                className="bg-gray-500 cursor-pointer  p-2 flex text-gray-500 "
-               
+                className="bg-gray-500 w-20 p-3 text-lg font-semibold border-4 hover:bg-gray-400 cursor-pointer"
               >
-                SAVE
+                ok
               </td>
               <td
-                className="cursor-pointer  p-2  bg-gray-500 text-gray-500"
                 onClick={() => setIsOpenEditModal(!isOpenEditModal)}
+                className="bg-gray-500 w-20 p-3 text-lg font-semibold hover:bg-gray-400 cursor-pointer"
               >
-                CANCEL
+                cancel
               </td>
-              <td
-              
-                onClick={editMovieList}
-                className="bg-gray-500 cursor-pointer  p-2 flex text-gray-500 "
-               
-              >
-                SAVE
-              </td>
-              <td
-                className="cursor-pointer  p-2  bg-gray-500 text-gray-500"
-                onClick={() => setIsOpenEditModal(!isOpenEditModal)}
-              >
-                CANCEL
-              </td>
-       
-
-              <td
-    
-                onClick={editMovieList}
-                className="bg-gray-500 cursor-pointer text-white p-2 flex  hover:bg-gray-400  items-center justify-center"
-               
-              >
-                SAVE
-              </td>
-              <td
-                className="bg-gray-500 cursor-pointer text-white p-2 flex  hover:bg-gray-400  items-center justify-center"
-                onClick={() => setIsOpenEditModal(!isOpenEditModal)}          
-              >
-                CANCEL
-              </td>
-           
             </tr>
           </tbody>
         </table>
