@@ -44,7 +44,7 @@ function ListMovie() {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
-
+console.log(movie)
   const isTvShowHandleChange = () => {
     return setTvShow(!tvShow);
   };
@@ -67,7 +67,7 @@ function ListMovie() {
 
     const resEdit = axios
       .patch("http://localhost:8080/admin/edit-movieList", formData)
-      .then((res) => setTest(res));
+      .then((res) => setIsOpenEditModal(false));
   };
 
   const defaultImage =
@@ -193,7 +193,7 @@ function ListMovie() {
 
             <tr className="border-4">
               <td className="border-4 p-1">Counting watching</td>
-              <td className="border-4 p-1">{dataEditModal.count_watching}</td>
+              <td className="border-4 p-1">{dataEditModal.count_watching ? dataEditModal.count_watching : "0" }</td>
 
               <td className="w-40 border-4 p-1">Counting watching </td>
               <input
@@ -210,7 +210,7 @@ function ListMovie() {
 
             <tr className="border-4">
               <td className="border-4 p-1">Counting Liking</td>
-              <td className="border-4 p-1">{dataEditModal.count_liked}</td>
+              <td className="border-4 p-1">{dataEditModal.count_liked ? dataEditModal.count_liked  : "0"}</td>
 
               <td className="w-40 border-4 p-1">Counting Liking </td>
               <input
@@ -227,7 +227,7 @@ function ListMovie() {
 
             <tr className="border-4">
               <td className="border-4 p-1">Detail</td>
-              <td className="w-96 border-4 p-1">{dataEditModal.detail}</td>
+              <td className="w-96 border-4 p-1">{dataEditModal.detail ? dataEditModal.detail : "---"}</td>
 
               <td className="w-40 border-4 p-1">Detail </td>
               <textarea
@@ -242,12 +242,12 @@ function ListMovie() {
 
             <tr className="border-4">
               <td className="border-4 p-1">TVShow</td>
-              <td className="border-4 p-1">{dataEditModal.isTVShow}</td>
+              <td className="border-4 p-1">{dataEditModal.isTVShow ? "YES" : " NO"}</td>
 
               <td className="w-40 border-4 p-1">TVShow</td>
               <input
                 onChange={isTvShowHandleChange}
-                value={tvShow ? tvShow : dataEditModal.isTVShow}
+                value={tvShow}
                 type="checkbox"
                 className="h-5 w-5 cursor-pointer"
               />
@@ -336,7 +336,7 @@ function ListMovie() {
 
             <tr className="border-4 	">
               <td className="border-4 p-1">Trailer</td>
-              <td className="border-4 p-1">{dataEditModal.trailer}</td>
+              <td className="border-4 p-1">{dataEditModal.trailer ? dataEditModal.trailer : "---"}</td>
 
               <td className="p-1">Trailer </td>
               <input
@@ -427,22 +427,22 @@ function ListMovie() {
                   {data.release_year}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.count_watching}
+                  {data.count_watching ? data.count_watching : "0"}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.count_liked}
+                  {data.count_liked ? data.count_liked : "0"}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.detail}
+                  {data.detail ? data.detail : "---"}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.isTVShow}
+                  {data.isTVShow ? "YES" : "NO"}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
                   {data.enumGenres}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.trailer}
+                  {data.trailer? data.trailer : "---" }
                 </td>
                 <td className="flex items-center justify-center translate-y- gap-2">
                   <div
