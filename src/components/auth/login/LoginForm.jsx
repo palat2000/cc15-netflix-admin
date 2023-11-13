@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import { addAccessToken } from "../../../utils/local-storage";
+
 import { useAdmin } from "../../../hooks/use-admin";
 
 function LoginForm() {
@@ -8,18 +8,19 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
 
-  // const navigate = useNavigate();
-
-  const navigate = useNavigate();
   const { login } = useAdmin();
 
   const handleSubmitForm = (data) => {
-    login(data).catch((err) => {
-      console.log("error_login", err.response.data.message);
-      navigate("/");
-    });
+    if (data) {
+      login(data).catch((err) => {
+        console.log("error_login", err.response?.data);
+        setError("username", { message: err.response?.data?.message });
+        // setError("password", { message: err.response?.data?.message });
+      });
+    }
   };
 
   return (

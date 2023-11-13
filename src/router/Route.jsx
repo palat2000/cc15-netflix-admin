@@ -6,14 +6,15 @@ import UserPage from "../pages/UserPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import Authenticated from "../components/auth/Authenticated";
+import RedirectIfAuthenticated from "../components/auth/RedirectIfAuthenticated";
 
 const router = createBrowserRouter([
   {
     path: "",
     element: (
-      // <Authenticated>
-      <Layout />
-      // </Authenticated>
+      <Authenticated>
+        <Layout />
+      </Authenticated>
     ),
     children: [
       { path: "", element: <HomePage /> },
@@ -23,11 +24,19 @@ const router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <LoginPage />,
+    element: (
+      <RedirectIfAuthenticated>
+        <LoginPage />
+      </RedirectIfAuthenticated>
+    ),
   },
   {
     path: "register",
-    element: <RegisterPage />,
+    element: (
+      <RedirectIfAuthenticated>
+        <RegisterPage />
+      </RedirectIfAuthenticated>
+    ),
   },
 ]);
 

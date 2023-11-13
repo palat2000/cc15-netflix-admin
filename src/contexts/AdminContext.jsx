@@ -7,7 +7,6 @@ import {
 } from "../utils/local-storage";
 import { useEffect } from "react";
 import axios from "../config/axios";
-
 export const AdminContext = createContext();
 
 export default function AuthContextProvider({ children }) {
@@ -44,7 +43,7 @@ export default function AuthContextProvider({ children }) {
     // eslint-disable-next-line no-useless-catch
     try {
       console.log(registerInputObject);
-      const res = await axios.post("/admin/register", registerInputObject);
+      const res = await axios.post("/admin/reqister", registerInputObject);
       addAccessToken(res.data.accessToken);
       setAuthAdmin(res?.data?.admin);
     } catch (err) {
