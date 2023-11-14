@@ -10,7 +10,7 @@ function ListMovie() {
   const [isOpenEditImage, setIsOpenEditImage] = useState(false);
   const [image, setIamge] = useState(null);
 
-  const [title, setTitle] = useState(movie.title);
+  const [title, setTitle] = useState(null);
 
   const [year, setYear] = useState(null);
 
@@ -21,6 +21,7 @@ function ListMovie() {
   const [detail, setDetail] = useState(null);
 
   const [tvShow, setTvShow] = useState(false);
+  const [isOpenTvShow, setIsOpenTvShow] = useState(false);
 
   const [isOpenEnumGen, setIsOpenEnumGen] = useState(false);
   const [enumGen, setEnumGen] = useState(null);
@@ -42,37 +43,63 @@ function ListMovie() {
     axios
       .post("http://localhost:8080/admin/delete-movieList", movieTargetDel)
       .then((res) => {
-        const aftherDelMovie = movie.findIndex((el) => {
+        const afterDelMovie = movie.findIndex((el) => {
           return el.id == res.data.id;
         });
-        movie.splice(aftherDelMovie, 1)
-        return setIsOpenConfirmDelete(!isOpenConfirmDelete)
-      });
+        movie.splice(afterDelMovie, 1);
+        return setIsOpenConfirmDelete(!isOpenConfirmDelete);
+      })
+      .catch((res) => console.log(res.data));
   };
-  console.log(movie);
   const isTvShowHandleChange = () => {
     return setTvShow(!tvShow);
   };
   const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
-  const [test, setTest] = useState(null);
 
   const editMovieList = () => {
     const formData = new FormData();
-
+    let subEnumGen;
     if (image !== null) formData.append("movieListImage", image);
-    formData.append("title", title);
-    formData.append("year", year);
-    formData.append("countWatch", countWatch);
-    formData.append("countLike", countLike);
-    formData.append("detail", detail);
+    if (enumGen !== null) {
+      formData.append("enumGen", enumGen);
+    }
+    if (title !== null) {
+      formData.append("title", title);
+    }
+    if (year !== null) {
+      formData.append("year", year);
+    }
+    if (countWatch !== null) {
+      formData.append("countWatch", countWatch);
+    }
+    if (countLike !== null) {
+      formData.append("countLike", countLike);
+    }
+
+    if (detail !== null) {
+      formData.append("detail", detail);
+    }
+
     formData.append("tvShow", tvShow);
-    formData.append("enumGen", enumGen);
+
+    formData.append("subEnumGen", subEnumGen);
+
     formData.append("trailer", trailer);
+
     formData.append("editTargetId", editTargetId);
 
-    const resEdit = axios
+    const after = axios
       .patch("http://localhost:8080/admin/edit-movieList", formData)
-      .then((res) => setMovie(res.data));
+      .then((res) => {
+        const afterEditMovie = movie.findIndex((el) => {
+          return el.id == res.data.id;
+        });
+        // movie.splice(afterEditMovie,1)
+        movie[afterEditMovie] = res.data;
+        // console.log(res.data)
+        // console.log(movie)
+        return setIsOpenEditModal(!isOpenEditModal);
+      });
   };
 
   const defaultImage =
@@ -260,12 +287,42 @@ function ListMovie() {
               </td>
 
               <td className="w-40 border-4 p-1">TVShow</td>
-              <input
-                onChange={isTvShowHandleChange}
-                value={tvShow}
-                type="checkbox"
-                className="h-5 w-5 cursor-pointer"
-              />
+                
+          { tvShow ?  <div>
+                {tvShow === "YES" ? "YES" : "NO"}
+              </div>
+              :
+              <div
+                className="cursor-pointer p-1"
+                onClick={() => setIsOpenTvShow(!isOpenTvShow)}
+              >
+                {dataEditModal.isTVShow ? "YES" : " NO"}
+              </div>
+              }
+
+
+              {isOpenTvShow && (
+                <div className="flex flex-col absolute bg-gray-300 gap-1 p-1   w-48">
+                  <div
+                    className="cursor-pointer p-1"
+                    onClick={() => {
+                      setIsOpenTvShow(!isOpenTvShow);
+                      return setTvShow("YES");
+                    }}
+                  >
+                    YES
+                  </div>
+                  <div
+                    className="cursor-pointer p-1"
+                    onClick={() => {
+                      setIsOpenTvShow(!isOpenTvShow);
+                      return setTvShow("NO");
+                    }}
+                  >
+                    NO
+                  </div>
+                </div>
+              )}
             </tr>
 
             <tr className="border-4">
@@ -273,12 +330,13 @@ function ListMovie() {
               <td className="border-4 p-1">{dataEditModal.enumGenres}</td>
 
               <td className="w-40 border-4 p-1">Enum Genres :</td>
-              <input
+              <div
                 onClick={() => setIsOpenEnumGen(!isOpenEnumGen)}
                 className="cursor-pointer p-1"
-                value={enumGen ? enumGen : dataEditModal.enumGenres}
                 type="text"
-              />
+              >
+                {enumGen ? enumGen : dataEditModal.enumGenres}
+              </div>
 
               {isOpenEnumGen && (
                 <div className="flex flex-col absolute bg-gray-300 gap-1 p-1   w-48 ">
@@ -468,6 +526,8 @@ function ListMovie() {
                       setEditTargetId(data.id);
                       return setIsOpenEditModal(!isOpenEditModal);
                     }}
+                    // onClick={()=>console.log(data)}
+                    // onClick={()=>setDataEditModal(data)}
                     className="p-3 text-sm tracking-wide text-left border hover:bg-green-500 hover:text-white"
                   >
                     EDIT
@@ -477,6 +537,7 @@ function ListMovie() {
                       setMovieTargetDel({ id: data.id });
                       return setIsOpenConfirmDelete(!isOpenConfirmDelete);
                     }}
+                    // onClick={()=>console.log(dataEditModal.enumGenres)}
                     className="p-3 text-sm tracking-wide text-left border hover:bg-red-500 hover:text-white"
                   >
                     DELETE
