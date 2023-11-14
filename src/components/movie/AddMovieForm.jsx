@@ -10,20 +10,14 @@ import ColMovie from "./ColMovie";
 
 function AddMovieForm() {
   const inputRef = useRef(null);
-  // const { addMovie, inputData, setInputData } = useMovie();
   const { handleUploadFile, data, setData } = useMovie();
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setInputData([]);
   };
 
   return (
     <div className="flex flex-col">
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        {/* {inputData.map((movie) => (
-          <AddMovie key={movie.id} movie={movie} />
-        ))} */}
         {!data && (
           <div className="flex">
             <div
@@ -58,8 +52,9 @@ function AddMovieForm() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
-                <tr key={index}>
+              {data.map((item, index) => {
+                console.log(item)
+                return <tr key={index}>
                   <td>{item.title}</td>
                   <td>{item.isTVShow ? "Yes" : "No"}</td>
                   <td>
@@ -94,15 +89,13 @@ function AddMovieForm() {
                     )}
                   </td>
                 </tr>
-              ))}
+              })}
             </tbody>
           </table>
         )}
         {data && (
           <div className="flex">
-            <button className="px-3 py-1 bg-primary text-white rounded-md self-start">
-              Submit
-            </button>
+
             <button
               onClick={() => setData(null)}
               type="button"

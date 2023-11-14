@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  admin-netflix:
+    specifier: 'link:'
+    version: 'link:'
   axios:
     specifier: ^1.6.0
     version: 1.6.0
