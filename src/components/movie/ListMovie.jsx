@@ -40,11 +40,16 @@ function ListMovie() {
 
   const deleteMovieList = () => {
     axios
-      .post("http://localhost:8080/admin/delete-movieList", movieTargetDel.id)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .post("http://localhost:8080/admin/delete-movieList", movieTargetDel)
+      .then((res) => {
+        const aftherDelMovie = movie.findIndex((el) => {
+          return el.id == res.data.id;
+        });
+        movie.splice(aftherDelMovie, 1)
+        return setIsOpenConfirmDelete(!isOpenConfirmDelete)
+      });
   };
-console.log(movie)
+  console.log(movie);
   const isTvShowHandleChange = () => {
     return setTvShow(!tvShow);
   };
@@ -67,7 +72,7 @@ console.log(movie)
 
     const resEdit = axios
       .patch("http://localhost:8080/admin/edit-movieList", formData)
-      .then((res) => setIsOpenEditModal(false));
+      .then((res) => setMovie(res.data));
   };
 
   const defaultImage =
@@ -76,19 +81,19 @@ console.log(movie)
     <div className="relative">
       {isOpenConfirmDelete && (
         <div className="bg-gray-300 absolute flex flex-col p-10  justify-center  items-center h-full w-full">
-          <div className="justify-center font-extrabold text-2xl">
+          <div className="justify-center font-extrabold text-4xl">
             Do you want to delete this item ?
           </div>
           <br />
           <div className="flex gap-2">
             <div
-              className="cursor-pointer hover:bg-gray-400 text-2xl p-3"
+              className="cursor-pointer hover:bg-gray-400 text-2xl p-3 bg-gray-500 hover:text-white"
               onClick={deleteMovieList}
             >
               Confirm
             </div>
             <div
-              className="cursor-pointer hover:bg-gray-400 text-2xl p-3"
+              className="cursor-pointer hover:bg-gray-400 text-2xl p-3 bg-gray-500 hover:text-white"
               onClick={() => setIsOpenConfirmDelete(!isOpenConfirmDelete)}
             >
               Cancel
@@ -193,7 +198,11 @@ console.log(movie)
 
             <tr className="border-4">
               <td className="border-4 p-1">Counting watching</td>
-              <td className="border-4 p-1">{dataEditModal.count_watching ? dataEditModal.count_watching : "0" }</td>
+              <td className="border-4 p-1">
+                {dataEditModal.count_watching
+                  ? dataEditModal.count_watching
+                  : "0"}
+              </td>
 
               <td className="w-40 border-4 p-1">Counting watching </td>
               <input
@@ -210,7 +219,9 @@ console.log(movie)
 
             <tr className="border-4">
               <td className="border-4 p-1">Counting Liking</td>
-              <td className="border-4 p-1">{dataEditModal.count_liked ? dataEditModal.count_liked  : "0"}</td>
+              <td className="border-4 p-1">
+                {dataEditModal.count_liked ? dataEditModal.count_liked : "0"}
+              </td>
 
               <td className="w-40 border-4 p-1">Counting Liking </td>
               <input
@@ -227,7 +238,9 @@ console.log(movie)
 
             <tr className="border-4">
               <td className="border-4 p-1">Detail</td>
-              <td className="w-96 border-4 p-1">{dataEditModal.detail ? dataEditModal.detail : "---"}</td>
+              <td className="w-96 border-4 p-1">
+                {dataEditModal.detail ? dataEditModal.detail : "---"}
+              </td>
 
               <td className="w-40 border-4 p-1">Detail </td>
               <textarea
@@ -242,7 +255,9 @@ console.log(movie)
 
             <tr className="border-4">
               <td className="border-4 p-1">TVShow</td>
-              <td className="border-4 p-1">{dataEditModal.isTVShow ? "YES" : " NO"}</td>
+              <td className="border-4 p-1">
+                {dataEditModal.isTVShow ? "YES" : " NO"}
+              </td>
 
               <td className="w-40 border-4 p-1">TVShow</td>
               <input
@@ -336,7 +351,9 @@ console.log(movie)
 
             <tr className="border-4 	">
               <td className="border-4 p-1">Trailer</td>
-              <td className="border-4 p-1">{dataEditModal.trailer ? dataEditModal.trailer : "---"}</td>
+              <td className="border-4 p-1">
+                {dataEditModal.trailer ? dataEditModal.trailer : "---"}
+              </td>
 
               <td className="p-1">Trailer </td>
               <input
@@ -353,19 +370,19 @@ console.log(movie)
           </tbody>
           <tbody>
             <tr>
-              <td className="text-white">ok</td>
-              <td className="text-white">cancel</td>
-              <td className="text-white">ok</td>
-              <td className="text-white">cancel</td>
+              <td className="text-gray-300"></td>
+              <td className="text-white"></td>
+              <td className="text-white"></td>
+              <td className="text-white"></td>
               <td
                 onClick={editMovieList}
-                className="bg-gray-500 w-20 p-3 text-lg font-semibold border-4 hover:bg-gray-400 cursor-pointer"
+                className="bg-gray-500 w-20 p- text-lg font-semibold border-4 hover:bg-gray-400 cursor-pointer hover:text-white  pl-6"
               >
                 ok
               </td>
               <td
                 onClick={() => setIsOpenEditModal(!isOpenEditModal)}
-                className="bg-gray-500 w-20 p-3 text-lg font-semibold hover:bg-gray-400 cursor-pointer"
+                className="bg-gray-500 w-20 p- text-lg font-semibold hover:bg-gray-400 cursor-pointer hover:text-white pl-3"
               >
                 cancel
               </td>
@@ -442,7 +459,7 @@ console.log(movie)
                   {data.enumGenres}
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.trailer? data.trailer : "---" }
+                  {data.trailer ? data.trailer : "---"}
                 </td>
                 <td className="flex items-center justify-center translate-y- gap-2">
                   <div
