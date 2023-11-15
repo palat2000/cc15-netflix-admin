@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import NetflixLogo from "../components/NetflixLogo";
+import { useAdmin } from "../hooks/use-admin";
 
 function Header() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const { logout } = useAdmin();
   return (
     <div className="bg-black flex py-1">
       <div className="flex justify-center w-64">
@@ -10,7 +12,8 @@ function Header() {
       </div>
       <div className="flex-1 flex justify-end items-center px-6">
         <button
-          onClick={() => navigate("/login")}
+          // onClick={() => navigate("/login")}
+          onClick={logout}
           className="text-white py-2 px-4 rounded-md hover:bg-primary"
         >
           Logout
