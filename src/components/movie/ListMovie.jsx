@@ -519,8 +519,7 @@ function ListMovie() {
                   dataEditModal.trailer ? dataEditModal.trailer : "---"
                 }`}
               >
-                {" "}
-                LINK
+               {dataEditModal.trailer ? "Link" : "---"}
               </a>
 
               <td className="p-1 text-black border-4 border-black">Trailer </td>
