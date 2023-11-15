@@ -200,15 +200,21 @@ axios
               <td className="border-4 p-1 text-black border-black">{dataEditModal.title}</td>
 
               <td className="w-40 border-4 p-1 text-black border-black">title</td>
-
+            {title == "" ?  <input
+            onChange={(e) => {
+                  setTitle(e.target.value);
+                }} 
+            value={title ?  title : ""}
+            type="6" />
+            :
               <input
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
-                value={title ? title : dataEditModal.title}
+                value={dataEditModal.title }
                 type="text"
                 className="p-1 text-black bg-gray-100 border-black"
-              />
+              />}
             </tr>
 
             <tr className="border-4 border-black">
