@@ -514,6 +514,7 @@ function ListMovie() {
                 {dataEditModal.trailer ? dataEditModal.trailer : "---"}
               </td> */}
               <a
+              
                 href={`${
                   dataEditModal.trailer ? dataEditModal.trailer : "---"
                 }`}
@@ -695,7 +696,7 @@ function ListMovie() {
                 {/* <td className="p-3 text-sm tracking-wide text-left border ">
                     {data.trailer ? data.trailer : "---"}
                   </td> */}
-                <a href={`${data.trailer}`}>Link</a>
+                <a href={`${data.trailer}`}>{data.trailer ? "Link" : ""}</a>
                 <td className="p-3 text-sm tracking-wide text-left border ">
                   {data.releaseDateForNetflix
                     ? data.releaseDateForNetflix
