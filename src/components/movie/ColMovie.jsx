@@ -3,7 +3,7 @@ function ColMovie({ item, name }) {
     <div className="flex flex-col gap-10 h-full">
       {item.video.map((videoItem, idx) => {
         return (
-          <div key={idx}>
+          <div key={idx} className="items-center justify-center">
             <h2>{videoItem[name]}</h2>
           </div>
         );
