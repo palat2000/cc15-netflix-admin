@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 
-export default function MovieEditPage({ openBox, movie, setOpenModal }) {
+export default function MovieEditPage({ openBox, movie, setOpenModal,setTrigger }) {
 
   const [uploadField, setUploadField] = useState({})
   let actor = ""
@@ -26,12 +26,10 @@ export default function MovieEditPage({ openBox, movie, setOpenModal }) {
       formData.append("videoEpisodeNo", uploadField.videoEpisodeNo || movie.video[0].videoEpisodeNo)
       formData.append("videoEpisodeName", uploadField.videoEpisodeName || movie.video[0].videoEpisodeName)
       formData.append("video", uploadField.videoUrl || movie.video[0].videoUrl);
-      for (var pair of formData) {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
       const res = await axios.post("http://localhost:8080/admin/upload", formData)
       if(res.data.message){
         alert(res.data.message)
+        setTrigger((prev) =>!prev)
       }
     }
     catch (err) {
@@ -156,7 +154,6 @@ export default function MovieEditPage({ openBox, movie, setOpenModal }) {
         </div>
         <div>
           <div>{movie.video.map((e) => {
-            console.log(e)
             return <div key={e.videoEpisodeNo}
               className="flex ">
               <div className="border flex flex-col border-black  bg-slate-200 w-3/12">
@@ -199,7 +196,8 @@ export default function MovieEditPage({ openBox, movie, setOpenModal }) {
         </div>
         <div className="justify-end flex pt-2 gap-2">
 
-          <button type="submit" className="bg-green-600 p-2 rounded-md text-white">Addmovie</button>
+          <button 
+          type="submit" className="bg-green-600 p-2 rounded-md text-white">Addmovie</button>
           <button
             className="bg-red-700 p-2 rounded-md text-white"
             onClick={() => {

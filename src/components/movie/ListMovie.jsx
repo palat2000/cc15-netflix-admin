@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
-function ListMovie() {
+function ListMovie({ setTrigger, trigger }) {
   const inputEl = useRef(null);
   const [movie, setMovie] = useState([]);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [dataEditModal, setDataEditModal] = useState(false);
-
   const [isOpenEditImage, setIsOpenEditImage] = useState(false);
   const [image, setIamge] = useState(null);
   const [title, setTitle] = useState(null);
@@ -14,17 +13,13 @@ function ListMovie() {
   const [countWatch, setCountWatch] = useState(null);
   const [countLike, setCountLike] = useState(null);
   const [detail, setDetail] = useState(null);
-
   const [tvShow, setTvShow] = useState(false);
   const [isOpenTvShow, setIsOpenTvShow] = useState(false);
-
   const [isOpenEnumGen, setIsOpenEnumGen] = useState(false);
   const [enumGen, setEnumGen] = useState(null);
-
   const [trailer, setTrailer] = useState(null);
   const [releaseDate, setReleaseDate] = useState(null);
   const [editTargetId, setEditTargetId] = useState(null);
-
   const [movieTargetDel, setMovieTargetDel] = useState(null);
 
   useEffect(() => {
@@ -33,8 +28,8 @@ function ListMovie() {
       .get("http://localhost:8080/admin/read-movieList")
       .then((res) => setMovie(res.data))
       .catch((err) => console.log(err));
-  }, []);
-
+  }, [trigger]);
+  console.log(trigger);
   const deleteMovieList = () => {
     axios
       .post("http://localhost:8080/admin/delete-movieList", movieTargetDel)
