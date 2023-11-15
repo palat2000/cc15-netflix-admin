@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState ,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function ListMovie() {
   const inputEl = useRef(null);
@@ -9,15 +9,10 @@ function ListMovie() {
 
   const [isOpenEditImage, setIsOpenEditImage] = useState(false);
   const [image, setIamge] = useState(null);
-
   const [title, setTitle] = useState(null);
-
   const [year, setYear] = useState(null);
-
   const [countWatch, setCountWatch] = useState(null);
-
   const [countLike, setCountLike] = useState(null);
-
   const [detail, setDetail] = useState(null);
 
   const [tvShow, setTvShow] = useState(false);
@@ -27,10 +22,11 @@ function ListMovie() {
   const [enumGen, setEnumGen] = useState(null);
 
   const [trailer, setTrailer] = useState(null);
-
+  const [releaseDate, setReleaseDate] = useState(null);
   const [editTargetId, setEditTargetId] = useState(null);
 
   const [movieTargetDel, setMovieTargetDel] = useState(null);
+
   useEffect(() => {
     console.log("first");
     axios
@@ -58,7 +54,7 @@ function ListMovie() {
 
   const editMovieList = () => {
     const formData = new FormData();
-    let subEnumGen;
+    // let subEnumGen;
     if (image !== null) formData.append("movieListImage", image);
     if (enumGen !== null) {
       formData.append("enumGen", enumGen);
@@ -82,22 +78,19 @@ function ListMovie() {
 
     formData.append("tvShow", tvShow);
 
-    formData.append("subEnumGen", subEnumGen);
+    // formData.append("subEnumGen", subEnumGen);
 
     formData.append("trailer", trailer);
 
     formData.append("editTargetId", editTargetId);
 
-axios
+    axios
       .patch("http://localhost:8080/admin/edit-movieList", formData)
       .then((res) => {
         const afterEditMovie = movie.findIndex((el) => {
           return el.id == res.data.id;
         });
-        // movie.splice(afterEditMovie,1)
         movie[afterEditMovie] = res.data;
-        // console.log(res.data)
-        // console.log(movie)
         return setIsOpenEditModal(!isOpenEditModal);
       });
   };
@@ -144,133 +137,200 @@ axios
             <tr className="border-4 border-black">
               <td className="border-4 text-black border-black">IMAGE</td>
               <td>
-                <img className="h-40 border border-black" src={dataEditModal.image} alt="" />
+                <img
+                  className="h-40 border border-black"
+                  src={dataEditModal.image}
+                  alt=""
+                />
               </td>
-          
+
               <img
-               onClick={() => inputEl.current.click()}
+                onClick={() => inputEl.current.click()}
                 src={image ? URL.createObjectURL(image) : defaultImage}
                 className="h-40 w-32 border cursor-pointer border-black"
                 alt=""
               />
-              
-                <td className="flex gap-2 border">
-                  <input
-                         ref={inputEl}
-                    onChange={(e) => {
-                      if (e.target.files[0]) {
-                        setIamge(e.target.files[0]);
-                      }
-                    }}
-                    type="file"
-                    name=""
-                    id=""
-                    className="border-4 hidden"
-                  />
-                  <div
-                    className="cursor-pointer text-black"
-                    onClick={() => setIsOpenEditImage(!isOpenEditImage)}
-                  >
-                    SAVE
-                  </div>
-                  <div
-                    className="cursor-pointer text-black"
-                    onClick={() => setIamge(null)}
-                  >
-                    DELETE
-                  </div>
-                  <div
-                    className="cursor-pointer text-black"
-                    onClick={() => {
-                      return setIsOpenEditImage(!isOpenEditImage);
-                    }}
-                  >
-                    CANCEL
-                  </div>
-                </td>
-       
-          
+
+              <td className="flex gap-2 border">
+                <input
+                  ref={inputEl}
+                  onChange={(e) => {
+                    if (e.target.files[0]) {
+                      setIamge(e.target.files[0]);
+                    }
+                  }}
+                  type="file"
+                  name=""
+                  id=""
+                  className="border-4 hidden"
+                />
+                <div
+                  className="cursor-pointer text-black"
+                  onClick={() => setIsOpenEditImage(!isOpenEditImage)}
+                >
+                  SAVE
+                </div>
+                <div
+                  className="cursor-pointer text-black"
+                  onClick={() => setIamge(null)}
+                >
+                  DELETE
+                </div>
+                <div
+                  className="cursor-pointer text-black"
+                  onClick={() => {
+                    return setIsOpenEditImage(!isOpenEditImage);
+                  }}
+                >
+                  CANCEL
+                </div>
+              </td>
             </tr>
             <tr className="border-4 border-black">
               <td className="border-4 p-1 text-black border-black">ID</td>
-              <td className="p-1 text-black border-black">{dataEditModal.id}</td>
+              <td className="p-1 text-black border-black">
+                {dataEditModal.id}
+              </td>
             </tr>
             <tr className="border-4 border-black">
               <td className="border-4 p-1 text-black border-black">Title</td>
-              <td className="border-4 p-1 text-black border-black">{dataEditModal.title}</td>
+              <td className="border-4 p-1 text-black border-black">
+                {dataEditModal.title}
+              </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">title</td>
-            {title  ?  <input
-            onChange={(e) => {
-                  setTitle(e.target.value);
-                }} 
-            value={title }
-            type="6" />
-            :
-    
-              <input
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                value={title == "" ? title  : dataEditModal.title }
-                type="text"
-                className="p-1 text-black bg-gray-100 border-black"
-              />}
+              <td className="w-40 border-4 p-1 text-black border-black">
+                title
+              </td>
+              {title ? (
+                <input
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  value={title}
+                  type="6"
+                />
+              ) : (
+                <input
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  value={title == "" ? title : dataEditModal.title}
+                  type="text"
+                  className="p-1 text-black bg-gray-100 border-black"
+                />
+              )}
             </tr>
 
             <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">Release year</td>
-              <td className="border-4 p-1 text-black border-black">{dataEditModal.release_year}</td>
+              <td className="border-4 p-1 text-black border-black">
+                Release year
+              </td>
+              <td className="border-4 p-1 text-black border-black">
+                {dataEditModal.release_year}
+              </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">Release year </td>
-              <input
-                onChange={(e) => {
-                  setYear(e.target.value);
-                }}
-                value={year ? year : dataEditModal.release_year}
-                type="text"
-                className="p-1 text-black bg-gray-100 border-black"
-              />
+              <td className="w-40 border-4 p-1 text-black border-black">
+                Release year{" "}
+              </td>
+              {year ? (
+                <input
+                  onChange={(e) => {
+                    setYear(e.target.value);
+                  }}
+                  value={year}
+                  type="text"
+                />
+              ) : (
+                <input
+                  onChange={(e) => {
+                    setYear(e.target.value);
+                  }}
+                  value={year == "" ? year : dataEditModal.release_year}
+                  type="text"
+                  className="p-1 text-black bg-gray-100 border-black"
+                />
+              )}
             </tr>
 
             <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">Counting watching</td>
+              <td className="border-4 p-1 text-black border-black">
+                Counting watching
+              </td>
               <td className="border-4 p-1 text-black border-black">
                 {dataEditModal.count_watching
                   ? dataEditModal.count_watching
                   : "0"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">Counting watching </td>
-              <input
-                onChange={(e) => {
-                  setCountWatch(e.target.value);
-                }}
-                value={countWatch ? countWatch : dataEditModal.count_watching}
-                type="text"
-                name=""
-                id=""
-                className="p-1 text-black bg-gray-100 border-black"
-              />
+              <td className="w-40 border-4 p-1 text-black border-black">
+                Counting watching{" "}
+              </td>
+              {countWatch ? (
+                <input
+                  onChange={(e) => {
+                    setCountWatch(e.target.value);
+                  }}
+                  value={countWatch}
+                  type="text"
+                />
+              ) : (
+                <input
+                  onChange={(e) => {
+                    setCountWatch(e.target.value);
+                  }}
+                  value={
+                    countWatch == ""
+                      ? countWatch
+                      : dataEditModal.count_watching
+                      ? dataEditModal.count_watching
+                      : "0"
+                  }
+                  type="text"
+                  name=""
+                  id=""
+                  className="p-1 text-black bg-gray-100 border-black"
+                />
+              )}
             </tr>
 
             <tr className="border-4 border-black ">
-              <td className="border-4 p-1 text-black border-black">Counting Liking</td>
+              <td className="border-4 p-1 text-black border-black">
+                Counting Liking
+              </td>
               <td className="border-4 p-1 text-black border-black">
                 {dataEditModal.count_liked ? dataEditModal.count_liked : "0"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">Counting Liking </td>
-              <input
-                onChange={(e) => {
-                  setCountLike(e.target.value);
-                }}
-                value={countLike ? countLike : dataEditModal.count_liked}
-                type="text"
-                name=""
-                id=""
-                className="p-1 text-black bg-gray-100 border-black"
-              />
+              <td className="w-40 border-4 p-1 text-black border-black">
+                Counting Liking{" "}
+              </td>
+
+              {countLike ? (
+                <input
+                  onChange={(e) => {
+                    setCountLike(e.target.value);
+                  }}
+                  value={countLike}
+                  type="text"
+                />
+              ) : (
+                <input
+                  onChange={(e) => {
+                    setCountLike(e.target.value);
+                  }}
+                  value={
+                    countLike == ""
+                      ? countLike
+                      : dataEditModal.countLike
+                      ? dataEditModal.countLike
+                      : "0"
+                  }
+                  type="text"
+                  name=""
+                  id=""
+                  className="p-1 text-black bg-gray-100 border-black"
+                />
+              )}
             </tr>
 
             <tr className="border-4 border-black">
@@ -279,15 +339,35 @@ axios
                 {dataEditModal.detail ? dataEditModal.detail : "---"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">Detail </td>
-              <textarea
-                onChange={(e) => {
-                  setDetail(e.target.value);
-                }}
-                value={detail ? detail : dataEditModal.detail}
-                type="text"
-                className="w-full h-full p-1 text-black bg-gray-100 border-black"
-              />
+              <td className="w-40 border-4 p-1 text-black border-black">
+                Detail{" "}
+              </td>
+
+              {detail ? (
+                <textarea
+                  onChange={(e) => {
+                    setDetail(e.target.value);
+                  }}
+                  name=""
+                  id=""
+                  className="w-full h-full p-1 text-black bg-gray-100 border-black"
+                ></textarea>
+              ) : (
+                <textarea
+                  onChange={(e) => {
+                    setDetail(e.target.value);
+                  }}
+                  value={
+                    detail == ""
+                      ? detail
+                      : dataEditModal.detail
+                      ? dataEditModal.detail
+                      : "---"
+                  }
+                  type="text"
+                  className="w-full h-full p-1 text-black bg-gray-100 border-black"
+                />
+              )}
             </tr>
 
             <tr className="border-4 border-black">
@@ -296,23 +376,25 @@ axios
                 {dataEditModal.isTVShow ? "YES" : " NO"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">TVShow</td>
-                
-          { tvShow ?  <div
-          className="text-black p-1 cursor-pointer border-black"
-          onClick={()=>setIsOpenTvShow(!isOpenTvShow)}
-          >
-                {tvShow === "YES" ? "YES" : "NO"}
-              </div>
-              :
-              <div
-                className="cursor-pointer p-1 text-black border-black"
-                onClick={() => setIsOpenTvShow(!isOpenTvShow)}
-              >
-                {dataEditModal.isTVShow ? "YES" : " NO"}
-              </div>
-              }
+              <td className="w-40 border-4 p-1 text-black border-black">
+                TVShow
+              </td>
 
+              {tvShow ? (
+                <div
+                  className="text-black p-1 cursor-pointer border-black"
+                  onClick={() => setIsOpenTvShow(!isOpenTvShow)}
+                >
+                  {tvShow === "YES" ? "YES" : "NO"}
+                </div>
+              ) : (
+                <div
+                  className="cursor-pointer p-1 text-black border-black"
+                  onClick={() => setIsOpenTvShow(!isOpenTvShow)}
+                >
+                  {dataEditModal.isTVShow ? "YES" : " NO"}
+                </div>
+              )}
 
               {isOpenTvShow && (
                 <div className="flex flex-col absolute bg-gray-300 gap-1 p-1   w-48 text-black">
@@ -339,10 +421,16 @@ axios
             </tr>
 
             <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">Enum Genres</td>
-              <td className="border-4 p-1 text-black border-black">{dataEditModal.enumGenres}</td>
+              <td className="border-4 p-1 text-black border-black">
+                Enum Genres
+              </td>
+              <td className="border-4 p-1 text-black border-black">
+                {dataEditModal.enumGenres}
+              </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">Enum Genres :</td>
+              <td className="w-40 border-4 p-1 text-black border-black">
+                Enum Genres :
+              </td>
               <div
                 onClick={() => setIsOpenEnumGen(!isOpenEnumGen)}
                 className="cursor-pointer p-1 text-black border-black"
@@ -422,21 +510,92 @@ axios
 
             <tr className="border-4 	border-black">
               <td className="border-4 p-1 text-black border-black">Trailer</td>
-              <td className="border-4 p-1 text-black border-black">
+              {/* <td className="border-4 p-1 text-black border-black">
                 {dataEditModal.trailer ? dataEditModal.trailer : "---"}
-              </td>
+              </td> */}
+              <a
+                href={`${
+                  dataEditModal.trailer ? dataEditModal.trailer : "---"
+                }`}
+              >
+                {" "}
+                LINK
+              </a>
 
               <td className="p-1 text-black border-4 border-black">Trailer </td>
-              <input
-                onChange={(e) => {
-                  setTrailer(e.target.value);
-                }}
-                value={trailer ? trailer : dataEditModal.trailer}
-                type="text"
-                name=""
-                id=""
-                className="p-1 text-black bg-gray-100 border-black"
-              />
+
+              {trailer ? (
+                <input
+                  value={trailer}
+                  onChange={(e) => {
+                    setTrailer(e.target.value);
+                  }}
+                  type="text"
+                  name=""
+                  id=""
+                />
+              ) : (
+                <input
+                  onChange={(e) => {
+                    setTrailer(e.target.value);
+                  }}
+                  value={
+                    trailer == ""
+                      ? trailer
+                      : dataEditModal.trailer
+                      ? dataEditModal.trailer
+                      : "---"
+                  }
+                  type="text"
+                  name=""
+                  id=""
+                  className="p-1 text-black bg-gray-100 border-black"
+                />
+              )}
+            </tr>
+
+            <tr className="border-4 	border-black">
+              <td className="border-4 p-1 text-black border-black">
+                Release date for Netflix
+              </td>
+              <td className="border-4 p-1 text-black border-black">
+                {dataEditModal.releaseDateForNetflix
+                  ? dataEditModal.releaseDateForNetflix
+                  : "---"}
+              </td>
+
+              <td className="p-1 text-black border-4 border-black">
+                Release date for Netflix{" "}
+              </td>
+
+              {releaseDate ? (
+                <input
+                  value={releaseDate}
+                  onChange={(e) => {
+                    setReleaseDate(e.target.value);
+                  }}
+                  type="text"
+                  name=""
+                  id=""
+                />
+              ) : (
+                <input
+                  onChange={(e) => {
+                    setReleaseDate(e.target.value);
+                  }}
+                  value={
+                    releaseDate == ""
+                      ? releaseDate
+                      : dataEditModal.releaseDate
+                      ? dataEditModal.releaseDate
+                      : "---"
+                  }
+                  type="text"
+                  name=""
+                  id=""
+                  className="p-1 text-black bg-gray-100 border-black"
+                />
+              )}
             </tr>
           </tbody>
           <tbody className="border-black border-4">
@@ -494,14 +653,17 @@ axios
               Trailer
             </th>
             <th className="p-3 text-sm tracking-wide text-left border ">
+              Release date for Netflix
+            </th>
+            <th className="p-3 text-sm tracking-wide text-left border ">
               EDIT TOOLS
             </th>
           </tr>
         </thead>
         {movie?.map((data, i) => {
           return (
-            <tbody key={i}>
-              <tr className="cursor-pointer  border-b-2">
+            <tbody key={i} className="">
+              <tr className="cursor-pointer  border-b-2 ">
                 <td className="p-3 text-sm tracking-wide text-left ">
                   <img className="h-20 w-40" src={data.image} alt="" />
                 </td>
@@ -526,12 +688,20 @@ axios
                 <td className="p-3 text-sm tracking-wide text-left border">
                   {data.isTVShow ? "YES" : "NO"}
                 </td>
-                <td className="p-3 text-sm tracking-wide text-left border">
+                <td className="p-3 text-sm tracking-wide text-left border ">
                   {data.enumGenres}
                 </td>
-                <td className="p-3 text-sm tracking-wide text-left border">
-                  {data.trailer ? data.trailer : "---"}
+
+                {/* <td className="p-3 text-sm tracking-wide text-left border ">
+                    {data.trailer ? data.trailer : "---"}
+                  </td> */}
+                <a href={`${data.trailer}`}>Link</a>
+                <td className="p-3 text-sm tracking-wide text-left border ">
+                  {data.releaseDateForNetflix
+                    ? data.releaseDateForNetflix
+                    : "---"}
                 </td>
+
                 <td className="flex items-center justify-center translate-y- gap-2">
                   <div
                     onClick={() => {
