@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ModalEditPage from "./ModalEditPage"
 
-export default function HandleModal({ movie }) {
+export default function HandleModal({ movie ,setTrigger }) {
     const [openModal, setOpenModal] = useState(false)
     return <div>
         <div
@@ -19,7 +19,7 @@ export default function HandleModal({ movie }) {
             </div>
             <div >
 
-                <ModalEditPage movie={movie} setOpenModal={setOpenModal} openModal={openModal} />
+                <ModalEditPage movie={movie} setTrigger={setTrigger}setOpenModal={setOpenModal} openModal={openModal} />
                 
             </div>
             
