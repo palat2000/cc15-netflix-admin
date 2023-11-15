@@ -10,6 +10,8 @@ function UserPage() {
 
   const [allUser, setAllUser] = useState([]);
 
+  console.log(allUser);
+
   // Each Column Definition results in one Column.
   const adGridColumnFormat = [
     { field: "id", headerName: "User ID", filter: true, flex: 1 },
