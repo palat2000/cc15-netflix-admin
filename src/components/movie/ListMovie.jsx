@@ -93,9 +93,9 @@ function ListMovie({ setTrigger, trigger }) {
   const defaultImage =
     "https://www.clipartbest.com/cliparts/dT8/on6/dT8on6qTe.jpeg";
   return (
-    <div className="relative">
+    <div className="">
       {isOpenConfirmDelete && (
-        <div className="bg-black absolute flex flex-col p-10  justify-center  items-center h-full w-full">
+        <div className="bg-black absolute flex flex-col p-10  justify-center  items-center h-full w-96">
           <div className="justify-center font-extrabold text-4xl text-white">
             Do you want to delete this item ?
           </div>
@@ -117,7 +117,7 @@ function ListMovie({ setTrigger, trigger }) {
         </div>
       )}
       {isOpenEditModal && (
-        <table className="bg-gray-300  w-full h-full  absolute border-black">
+        <table className="bg-gray-300 h-full  absolute border-black">
           <thead className=" border-4 bg-black border-black">
             <tr className="border-4 border-black">
               <th className="border-4 border-black text-white p-2">COLUMN</th>
