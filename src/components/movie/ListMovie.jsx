@@ -386,7 +386,9 @@ function ListMovie({ setTrigger, trigger }) {
                 </div>
               ) : (
                 
-                <div className="flex gap-2 items-center"> 
+                <div 
+                onClick={() => setIsOpenTvShow(!isOpenTvShow)}
+                className="flex gap-2 items-center"> 
 
                 <div
                   className="cursor-pointer p-1 text-black border-black group"
