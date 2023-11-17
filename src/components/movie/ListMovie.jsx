@@ -575,7 +575,7 @@ function ListMovie({ setTrigger, trigger }) {
               </td>
 
               <td className="p-1 text-black border-2 border-black">
-                Release date for Netflix{" "}
+                Released date for Netflix{" "}
               </td>
 
               {releaseDate ? (
@@ -632,7 +632,7 @@ function ListMovie({ setTrigger, trigger }) {
         </table>
       )}
       <h1 className="text-2xl mb-2 p-2 font-extrabold ">Movie lists</h1>
-      <table className="w-full ">
+      <table className="w-full  ">
         <thead>
           <tr className="bg-gray-400 border-b-2 border border-white ">
             <th className="p-3 text-sm tracking-wide text-left border ">
@@ -664,7 +664,7 @@ function ListMovie({ setTrigger, trigger }) {
               Trailer
             </th>
             <th className="p-3 text-sm tracking-wide text-left border ">
-              Release date for Netflix
+              Released date for Netflix
             </th>
             <th className="p-3 text-sm tracking-wide text-left border ">
               EDIT TOOLS
@@ -709,7 +709,7 @@ function ListMovie({ setTrigger, trigger }) {
                 <a href={`${data.trailer}`}>{data.trailer ? "Link" : ""}</a>
                 <td className="p-3 text-sm tracking-wide text-left border ">
                   {data.releaseDateForNetflix
-                    ? data.releaseDateForNetflix
+                    ? data.releaseDateForNetflix.slice(0, 10)
                     : "---"}
                 </td>
 
@@ -722,7 +722,7 @@ function ListMovie({ setTrigger, trigger }) {
                     }}
                     // onClick={()=>console.log(data)}
                     // onClick={()=>setDataEditModal(data)}
-                    className="p-3 text-sm tracking-wide text-left border hover:bg-green-500 hover:text-white"
+                    className="p-3 text-sm tracking-wide text-left border hover:bg-green-500 hover:text-white rounded-sm"
                   >
                     EDIT
                   </div>
@@ -732,7 +732,7 @@ function ListMovie({ setTrigger, trigger }) {
                       return setIsOpenConfirmDelete(!isOpenConfirmDelete);
                     }}
                     // onClick={()=>console.log(dataEditModal.enumGenres)}
-                    className="p-3 text-sm tracking-wide text-left border hover:bg-red-500 hover:text-white"
+                    className="p-3 text-sm tracking-wide text-left border hover:bg-red-500 hover:text-white rounded-sm"
                   >
                     DELETE
                   </div>
