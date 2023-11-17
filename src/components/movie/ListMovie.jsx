@@ -131,18 +131,18 @@ function ListMovie({ setTrigger, trigger }) {
           <tbody className="border-4 border-black">
             <tr className="border-4 border-black">
               <td className="border-4 text-black border-black">IMAGE</td>
-              <td>
+              {/* <td>
                 <img
                   className="h-40 border border-black"
                   src={dataEditModal.image}
                   alt=""
                 />
-              </td>
+              </td> */}
 
               <img
                 onClick={() => inputEl.current.click()}
-                src={image ? URL.createObjectURL(image) : defaultImage}
-                className="h-40 w-32 border cursor-pointer border-black"
+                src={image ? URL.createObjectURL(image) : dataEditModal.image ? dataEditModal.image  : defaultImage}
+                className="h-40 w-56 border cursor-pointer border-black"
                 alt=""
               />
 
@@ -159,26 +159,26 @@ function ListMovie({ setTrigger, trigger }) {
                   id=""
                   className="border-4 hidden"
                 />
-                <div
+                {/* <div
                   className="cursor-pointer text-black"
                   onClick={() => setIsOpenEditImage(!isOpenEditImage)}
                 >
                   SAVE
-                </div>
+                </div> */}
                 <div
-                  className="cursor-pointer text-black"
+                  className="cursor-pointer  bg-red-700 text-white p-1 hover:bg-red-600 " 
                   onClick={() => setIamge(null)}
                 >
                   DELETE
                 </div>
-                <div
+                {/* <div
                   className="cursor-pointer text-black"
                   onClick={() => {
                     return setIsOpenEditImage(!isOpenEditImage);
                   }}
                 >
                   CANCEL
-                </div>
+                </div> */}
               </td>
             </tr>
             <tr className="border-4 border-black">
@@ -584,7 +584,7 @@ function ListMovie({ setTrigger, trigger }) {
                       ? dataEditModal.releaseDate
                       : "---"
                   }
-                  type="text"
+                  type="date"
                   name=""
                   id=""
                   className="p-1 text-black bg-gray-100 border-black"
@@ -599,7 +599,8 @@ function ListMovie({ setTrigger, trigger }) {
               <td className="text-white"></td>
               <td className="text-white"></td>
               <td
-                onClick={editMovieList}
+                // onClick={editMovieList}
+                onClick={()=>console.log(releaseDate)}
                 className="bg-white w-20  text-lg font-semibold border-4  cursor-pointer hover:text-white hover:bg-red-600  border-black pl-6"
               >
                 ok
