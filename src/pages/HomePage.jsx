@@ -21,8 +21,8 @@ function HomePage() {
       <div className="flex ">
         <Graph top10={top10} />
       </div>
-      <div className="flex gap-1 justify-between">
-        <div className="flex  border w-5/12">
+      <div className="flex gap-1 justify-between text-xs">
+        <div className="flex  border w-full">
           <NewestMembers newest={newest} />
         </div>
         <div className="flex ">

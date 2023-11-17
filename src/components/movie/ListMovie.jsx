@@ -30,7 +30,9 @@ function ListMovie({ setTrigger, trigger }) {
       .catch((err) => console.log(err));
   }, [trigger]);
   console.log(trigger);
+
   const deleteMovieList = () => {
+    console.log(movieTargetDel)
     axios
       .post("http://localhost:8080/admin/delete-movieList", movieTargetDel)
       .then((res) => {
@@ -38,6 +40,7 @@ function ListMovie({ setTrigger, trigger }) {
           return el.id == res.data.id;
         });
         movie.splice(afterDelMovie, 1);
+        alert(res.data.message)
         return setIsOpenConfirmDelete(!isOpenConfirmDelete);
       })
       .catch((res) => console.log(res.data));
@@ -85,6 +88,7 @@ function ListMovie({ setTrigger, trigger }) {
         const afterEditMovie = movie.findIndex((el) => {
           return el.id == res.data.id;
         });
+        console.log(res.data)
         movie[afterEditMovie] = res.data;
         return setIsOpenEditModal(!isOpenEditModal);
       });
@@ -599,8 +603,8 @@ function ListMovie({ setTrigger, trigger }) {
               <td className="text-white"></td>
               <td className="text-white"></td>
               <td
-                // onClick={editMovieList}
-                onClick={()=>console.log(releaseDate)}
+                onClick={editMovieList}
+                // onClick={()=>console.log(releaseDate)}
                 className="bg-white w-20  text-lg font-semibold border-4  cursor-pointer hover:text-white hover:bg-red-600  border-black pl-6"
               >
                 ok
