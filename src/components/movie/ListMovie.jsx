@@ -96,7 +96,7 @@ function ListMovie({ setTrigger, trigger }) {
   return (
     <div className="">
       {isOpenConfirmDelete && (
-        <div className="bg-black absolute flex flex-col p-10  justify-center  items-center h-full w-3/4 rounded-2xl ">
+        <div className="bg-black absolute flex flex-col p-10  justify-center  items-center h-full w-10/12 rounded-2xl ">
           <div className="justify-center font-extrabold text-4xl text-white">
             Do you want to delete this item ?
           </div>
