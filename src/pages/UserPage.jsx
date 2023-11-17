@@ -24,14 +24,8 @@ function UserPage() {
     { field: "mobile", headerName: "Mobile", filter: true, flex: 1 },
     { field: "activeAt", headerName: "Active At", flex: 1 },
     { field: "expiredDate", headerName: "Expired Date", filter: true, flex: 1 },
-    {
-      field: "subscriptionId",
-      headerName: "Subcription ID",
-      filter: true,
-      flex: 1,
-    },
     { field: "customerId", headerName: "Customer ID", filter: true, flex: 1 },
-    { field: "sessionId", headerName: "Session ID", filter: true, flex: 1 },
+    // { field: "sessionId", headerName: "Session ID", filter: true, flex: 1 },
   ];
 
   useEffect(
