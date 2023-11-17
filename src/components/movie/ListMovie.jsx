@@ -118,7 +118,7 @@ function ListMovie({ setTrigger, trigger }) {
         </div>
       )}
       {isOpenEditModal && (
-        <table className="bg-gray-300 h-full w-full  border-black absolute ">
+        <table className="bg-gray-300 h-full  w-10/12 border-black absolute ">
           <thead className=" border-2 bg-black border-black">
             <tr className="border-2 border-black">
               <th className="border-2 border-black text-white p-">COLUMN</th>
