@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 function ListMovie({ setTrigger, trigger }) {
   const inputEl = useRef(null);
@@ -95,20 +96,20 @@ function ListMovie({ setTrigger, trigger }) {
   return (
     <div className="">
       {isOpenConfirmDelete && (
-        <div className="bg-black absolute flex flex-col p-10  justify-center  items-center h-full w-96">
+        <div className="bg-black absolute flex flex-col p-10  justify-center  items-center h-full w-10/12 rounded-2xl ">
           <div className="justify-center font-extrabold text-4xl text-white">
             Do you want to delete this item ?
           </div>
           <br />
-          <div className="flex gap-2">
+          <div className="flex gap-5">
             <div
-              className="cursor-pointer  text-2xl p-3 bg-white hover:text-white hover:bg-red-600"
+              className="cursor-pointer font-bold text-2xl p-3 bg-white hover:text-white hover:bg-red-600 rounded-sm"
               onClick={deleteMovieList}
             >
               Confirm
             </div>
             <div
-              className="cursor-pointer  text-2xl p-3 bg-white hover:text-white hover:bg-red-600"
+              className="cursor-pointer font-bold text-2xl p-3 bg-white hover:text-white hover:bg-red-600 rounded-sm "
               onClick={() => setIsOpenConfirmDelete(!isOpenConfirmDelete)}
             >
               Cancel
@@ -117,36 +118,36 @@ function ListMovie({ setTrigger, trigger }) {
         </div>
       )}
       {isOpenEditModal && (
-        <table className="bg-gray-300 h-full  absolute border-black">
-          <thead className=" border-4 bg-black border-black">
-            <tr className="border-4 border-black">
-              <th className="border-4 border-black text-white p-2">COLUMN</th>
-              <th className="text-white border-4 border-black">INFORMATION</th>
+        <table className="bg-gray-300 h-full  w-10/12 border-black absolute ">
+          <thead className=" border-2 bg-black border-black">
+            <tr className="border-2 border-black">
+              <th className="border-2 border-black text-white p-">COLUMN</th>
+              <th className="text-white border-2 border-black">INFORMATION</th>
               <th className=" border-black text-white"></th>
               <th className="text-white border-black">EDIT</th>
               <th className="text-white border-black"></th>
               <th className="text-white border-black"></th>
             </tr>
           </thead>
-          <tbody className="border-4 border-black">
-            <tr className="border-4 border-black">
-              <td className="border-4 text-black border-black">IMAGE</td>
-              <td>
+          <tbody className="border-2 border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 text-black border-black">IMAGE</td>
+              {/* <td>
                 <img
                   className="h-40 border border-black"
                   src={dataEditModal.image}
                   alt=""
                 />
-              </td>
+              </td> */}
 
               <img
                 onClick={() => inputEl.current.click()}
-                src={image ? URL.createObjectURL(image) : defaultImage}
-                className="h-40 w-32 border cursor-pointer border-black"
+                src={image ? URL.createObjectURL(image) : dataEditModal.image ? dataEditModal.image  : defaultImage}
+                className="h-40 w-56 border cursor-pointer border-black"
                 alt=""
               />
 
-              <td className="flex gap-2 border">
+              <td className="flex gap-2 ">
                 <input
                   ref={inputEl}
                   onChange={(e) => {
@@ -157,43 +158,43 @@ function ListMovie({ setTrigger, trigger }) {
                   type="file"
                   name=""
                   id=""
-                  className="border-4 hidden"
+                  className="border-2 hidden"
                 />
-                <div
+                {/* <div
                   className="cursor-pointer text-black"
                   onClick={() => setIsOpenEditImage(!isOpenEditImage)}
                 >
                   SAVE
-                </div>
+                </div> */}
                 <div
-                  className="cursor-pointer text-black"
+                  className="cursor-pointer  bg-red-700 text-white p-1 hover:bg-red-600 " 
                   onClick={() => setIamge(null)}
                 >
                   DELETE
                 </div>
-                <div
+                {/* <div
                   className="cursor-pointer text-black"
                   onClick={() => {
                     return setIsOpenEditImage(!isOpenEditImage);
                   }}
                 >
                   CANCEL
-                </div>
+                </div> */}
               </td>
             </tr>
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">ID</td>
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1 text-black border-black">ID</td>
               <td className="p-1 text-black border-black">
                 {dataEditModal.id}
               </td>
             </tr>
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">Title</td>
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1 text-black border-black">Title</td>
+              <td className="border-2 p-1 text-black border-black">
                 {dataEditModal.title}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 title
               </td>
               {title ? (
@@ -202,7 +203,7 @@ function ListMovie({ setTrigger, trigger }) {
                     setTitle(e.target.value);
                   }}
                   value={title}
-                  type="6"
+                  type="text"
                 />
               ) : (
                 <input
@@ -211,20 +212,20 @@ function ListMovie({ setTrigger, trigger }) {
                   }}
                   value={title == "" ? title : dataEditModal.title}
                   type="text"
-                  className="p-1 text-black bg-gray-100 border-black"
+                  className="p-1 text-black bg-gray-100 border-black "
                 />
               )}
             </tr>
 
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1  border-black">
                 Release year
               </td>
-              <td className="border-4 p-1 text-black border-black">
+              <td className="border-2 p-1  border-black">
                 {dataEditModal.release_year}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 Release year{" "}
               </td>
               {year ? (
@@ -234,6 +235,7 @@ function ListMovie({ setTrigger, trigger }) {
                   }}
                   value={year}
                   type="text"
+                  className="p-1 text-black bg-gray-100 border-black"
                 />
               ) : (
                 <input
@@ -247,17 +249,17 @@ function ListMovie({ setTrigger, trigger }) {
               )}
             </tr>
 
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1 text-black border-black">
                 Counting watching
               </td>
-              <td className="border-4 p-1 text-black border-black">
+              <td className="border-2 p-1 text-black border-black">
                 {dataEditModal.count_watching
                   ? dataEditModal.count_watching
                   : "0"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 Counting watching{" "}
               </td>
               {countWatch ? (
@@ -288,15 +290,15 @@ function ListMovie({ setTrigger, trigger }) {
               )}
             </tr>
 
-            <tr className="border-4 border-black ">
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black ">
+              <td className="border-2 p-1 text-black border-black">
                 Counting Liking
               </td>
-              <td className="border-4 p-1 text-black border-black">
+              <td className="border-2 p-1 text-black border-black">
                 {dataEditModal.count_liked ? dataEditModal.count_liked : "0"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 Counting Liking{" "}
               </td>
 
@@ -328,13 +330,13 @@ function ListMovie({ setTrigger, trigger }) {
               )}
             </tr>
 
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">Detail</td>
-              <td className="w-96 border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1 text-black border-black">Detail</td>
+              <td className="w-96 border-2 p-1 text-black border-black">
                 {dataEditModal.detail ? dataEditModal.detail : "---"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 Detail{" "}
               </td>
 
@@ -345,7 +347,7 @@ function ListMovie({ setTrigger, trigger }) {
                   }}
                   name=""
                   id=""
-                  className="w-full h-full p-1 text-black bg-gray-100 border-black"
+                  className="w-full h-96 p-1 text-black bg-gray-100 border-black"
                 ></textarea>
               ) : (
                 <textarea
@@ -360,18 +362,18 @@ function ListMovie({ setTrigger, trigger }) {
                       : "---"
                   }
                   type="text"
-                  className="w-full h-full p-1 text-black bg-gray-100 border-black"
+                  className="w-96 h-full p-1 text-black bg-gray-100 border-black"
                 />
               )}
             </tr>
 
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">TVShow</td>
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1 text-black border-black">TVShow</td>
+              <td className="border-2 p-1 text-black border-black">
                 {dataEditModal.isTVShow ? "YES" : " NO"}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 TVShow
               </td>
 
@@ -383,18 +385,27 @@ function ListMovie({ setTrigger, trigger }) {
                   {tvShow === "YES" ? "YES" : "NO"}
                 </div>
               ) : (
+                
+                <div 
+                onClick={() => setIsOpenTvShow(!isOpenTvShow)}
+                className="flex gap-2 items-center"> 
+
                 <div
-                  className="cursor-pointer p-1 text-black border-black"
+                  className="cursor-pointer p-1 text-black border-black group"
                   onClick={() => setIsOpenTvShow(!isOpenTvShow)}
                 >
                   {dataEditModal.isTVShow ? "YES" : " NO"}
                 </div>
+               {isOpenTvShow ? 
+                  <IoMdArrowDropdown className="rotate-180 transition-transform duration-300 text-lg" /> :
+                  <IoMdArrowDropdown className="transition-transform duration-300 text-lg" />}
+                </div>
               )}
 
               {isOpenTvShow && (
-                <div className="flex flex-col absolute bg-gray-300 gap-1 p-1   w-48 text-black">
+                <div className="flex flex-col absolute bg-gray-300  w-48 text-black">
                   <div
-                    className="cursor-pointer p-1 text-black"
+                    className="cursor-pointer p-1 text-black hover:bg-gray-400 border-2"
                     onClick={() => {
                       setIsOpenTvShow(!isOpenTvShow);
                       return setTvShow("YES");
@@ -403,7 +414,7 @@ function ListMovie({ setTrigger, trigger }) {
                     YES
                   </div>
                   <div
-                    className="cursor-pointer p-1 text-black"
+                    className="cursor-pointer p-1 text-black hover:bg-gray-400 border-2"
                     onClick={() => {
                       setIsOpenTvShow(!isOpenTvShow);
                       return setTvShow("NO");
@@ -415,33 +426,37 @@ function ListMovie({ setTrigger, trigger }) {
               )}
             </tr>
 
-            <tr className="border-4 border-black">
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 border-black">
+              <td className="border-2 p-1 text-black border-black">
                 Enum Genres
               </td>
-              <td className="border-4 p-1 text-black border-black">
+              <td className="border-2 p-1 text-black border-black">
                 {dataEditModal.enumGenres}
               </td>
 
-              <td className="w-40 border-4 p-1 text-black border-black">
+              <td className="w-40 border-2 p-1 text-black border-black">
                 Enum Genres :
               </td>
               <div
                 onClick={() => setIsOpenEnumGen(!isOpenEnumGen)}
-                className="cursor-pointer p-1 text-black border-black"
+                className="cursor-pointer p-1 text-black border-black flex gap-2"
                 type="text "
               >
                 {enumGen ? enumGen : dataEditModal.enumGenres}
+              { isOpenEnumGen ?   <IoMdArrowDropdown className="rotate-180 transition-transform duration-300 text-lg" /> :
+                  <IoMdArrowDropdown className="transition-transform duration-300 text-lg" />}
               </div>
+       
+         
 
               {isOpenEnumGen && (
-                <div className="flex flex-col absolute bg-gray-300 gap-1 p-1 text-black  w-48 border-black">
+                <div className="flex flex-col absolute bg-gray-300  text-black  w-48 border-black">
                   <div
                     onClick={() => {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen("COMEDIES");
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400  border-2"
                   >
                     COMEDIES
                   </div>
@@ -450,7 +465,7 @@ function ListMovie({ setTrigger, trigger }) {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen("ACTION");
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400 border-2"
                   >
                     ACTION
                   </div>
@@ -459,7 +474,7 @@ function ListMovie({ setTrigger, trigger }) {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen("HORROR");
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400 border-2"
                   >
                     HORROR
                   </div>
@@ -468,7 +483,7 @@ function ListMovie({ setTrigger, trigger }) {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen("SPORTS");
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400 border-2"
                   >
                     SPORTS
                   </div>
@@ -477,7 +492,7 @@ function ListMovie({ setTrigger, trigger }) {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen("KID");
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400 border-2"
                   >
                     KID
                   </div>
@@ -486,7 +501,7 @@ function ListMovie({ setTrigger, trigger }) {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen("ROMANCE");
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400 border-2"
                   >
                     ROMANCE
                   </div>
@@ -495,16 +510,17 @@ function ListMovie({ setTrigger, trigger }) {
                       setIsOpenEnumGen(!isOpenEnumGen);
                       return setEnumGen(null);
                     }}
-                    className="cursor-pointer hover:bg-gray-400 text-black"
+                    className="cursor-pointer hover:bg-gray-400 border-2"
                   >
                     RESET
                   </div>
+                    
                 </div>
               )}
             </tr>
 
-            <tr className="border-4 	border-black">
-              <td className="border-4 p-1 text-black border-black">Trailer</td>
+            <tr className="border-2 	border-black">
+              <td className="border-2 p-1 text-black border-black">Trailer</td>
               {/* <td className="border-4 p-1 text-black border-black">
                 {dataEditModal.trailer ? dataEditModal.trailer : "---"}
               </td> */}
@@ -516,7 +532,7 @@ function ListMovie({ setTrigger, trigger }) {
                 {dataEditModal.trailer ? "Link" : "---"}
               </a>
 
-              <td className="p-1 text-black border-4 border-black">Trailer </td>
+              <td className="p-1 text-black border-2 border-black">Trailer </td>
 
               {trailer ? (
                 <input
@@ -548,18 +564,18 @@ function ListMovie({ setTrigger, trigger }) {
               )}
             </tr>
 
-            <tr className="border-4 	border-black">
-              <td className="border-4 p-1 text-black border-black">
+            <tr className="border-2 	border-black">
+              <td className="border-2 p-1 text-black border-black">
                 Release date for Netflix
               </td>
-              <td className="border-4 p-1 text-black border-black">
+              <td className="border-2 p-1 text-black border-black">
                 {dataEditModal.releaseDateForNetflix
                   ? dataEditModal.releaseDateForNetflix
                   : "---"}
               </td>
 
-              <td className="p-1 text-black border-4 border-black">
-                Release date for Netflix{" "}
+              <td className="p-1 text-black border-2 border-black">
+                Released date for Netflix{" "}
               </td>
 
               {releaseDate ? (
@@ -584,7 +600,7 @@ function ListMovie({ setTrigger, trigger }) {
                       ? dataEditModal.releaseDate
                       : "---"
                   }
-                  type="text"
+                  type="date"
                   name=""
                   id=""
                   className="p-1 text-black bg-gray-100 border-black"
@@ -592,21 +608,22 @@ function ListMovie({ setTrigger, trigger }) {
               )}
             </tr>
           </tbody>
-          <tbody className="border-black border-4">
+          <tbody className="border-black border-2">
             <tr>
               <td className="text-gray-300 "></td>
               <td className="text-white"></td>
               <td className="text-white"></td>
               <td className="text-white"></td>
               <td
-                onClick={editMovieList}
-                className="bg-white w-20  text-lg font-semibold border-4  cursor-pointer hover:text-white hover:bg-red-600  border-black pl-6"
+                // onClick={editMovieList}
+                onClick={()=>console.log(releaseDate)}
+                className="bg-white w-20  text-lg font-semibold border-2  cursor-pointer hover:text-white hover:bg-red-600  border-black pl-6"
               >
                 ok
               </td>
               <td
                 onClick={() => setIsOpenEditModal(!isOpenEditModal)}
-                className="bg-white w-20 p- text-lg font-semibold cursor-pointer hover:text-white hover:bg-red-600 border-4 border-black pl-3"
+                className="bg-white w-20 p- text-lg font-semibold cursor-pointer hover:text-white hover:bg-red-600 border-2 border-black pl-3"
               >
                 cancel
               </td>
@@ -615,7 +632,7 @@ function ListMovie({ setTrigger, trigger }) {
         </table>
       )}
       <h1 className="text-2xl mb-2 p-2 font-extrabold ">Movie lists</h1>
-      <table className="w-full ">
+      <table className="w-full  ">
         <thead>
           <tr className="bg-gray-400 border-b-2 border border-white ">
             <th className="p-3 text-sm tracking-wide text-left border ">
@@ -647,7 +664,7 @@ function ListMovie({ setTrigger, trigger }) {
               Trailer
             </th>
             <th className="p-3 text-sm tracking-wide text-left border ">
-              Release date for Netflix
+              Released date for Netflix
             </th>
             <th className="p-3 text-sm tracking-wide text-left border ">
               EDIT TOOLS
@@ -659,7 +676,7 @@ function ListMovie({ setTrigger, trigger }) {
             <tbody key={i} className="">
               <tr className="cursor-pointer  border-b-2 ">
                 <td className="p-3 text-sm tracking-wide text-left ">
-                  <img className="h-20 w-40" src={data.image} alt="" />
+                  <img className="h-20 w-20" src={data.image} alt="" />
                 </td>
                 <td className="p-3 text-sm tracking-wide text-left border">
                   {data.id}
@@ -692,7 +709,7 @@ function ListMovie({ setTrigger, trigger }) {
                 <a href={`${data.trailer}`}>{data.trailer ? "Link" : ""}</a>
                 <td className="p-3 text-sm tracking-wide text-left border ">
                   {data.releaseDateForNetflix
-                    ? data.releaseDateForNetflix
+                    ? data.releaseDateForNetflix.slice(0, 10)
                     : "---"}
                 </td>
 
@@ -705,7 +722,7 @@ function ListMovie({ setTrigger, trigger }) {
                     }}
                     // onClick={()=>console.log(data)}
                     // onClick={()=>setDataEditModal(data)}
-                    className="p-3 text-sm tracking-wide text-left border hover:bg-green-500 hover:text-white"
+                    className="p-3 text-sm tracking-wide text-left border hover:bg-green-500 hover:text-white rounded-sm"
                   >
                     EDIT
                   </div>
@@ -715,7 +732,7 @@ function ListMovie({ setTrigger, trigger }) {
                       return setIsOpenConfirmDelete(!isOpenConfirmDelete);
                     }}
                     // onClick={()=>console.log(dataEditModal.enumGenres)}
-                    className="p-3 text-sm tracking-wide text-left border hover:bg-red-500 hover:text-white"
+                    className="p-3 text-sm tracking-wide text-left border hover:bg-red-500 hover:text-white rounded-sm"
                   >
                     DELETE
                   </div>
